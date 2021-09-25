@@ -24,4 +24,4 @@
 * You can install Simple Referrals through the package manager of your forum administration.
 
 ## Changelog
-You can find the changelog for Simple Referrals on SMF Tricks: [Changelog](https://smftricks.com/index.php?topic=2093.0)
+You can find the changelog for Simple Referrals on SMF Tricks: [Changelog](https://smftricks.com/index.php?topic=2202.0)
