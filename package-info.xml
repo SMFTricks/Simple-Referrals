@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<id>smftricks:simplereferrals</id>
+	<name>Simple Referrals</name>
+	<version>1.0</version>
+	<type>modification</type>
+	<install for="2.1 - 2.1.99, 2.1 RC4">
+		<!-- Mod Readme -->
+		<readme lang="english" parsebbc="true" type="file">readme/readme.english.txt</readme>
+		<!-- Credits -->
+		<credits url="https://smftricks.com" license="GPL 3.0" copyright="SMF Tricks" licenseurl="https://www.gnu.org/licenses/gpl-3.0.en.html">Simple Referrals</credits>
+		<!-- License -->
+		<license type="inline" parsebbc="false">
+			This Source Code Form is subject to the terms of the General Public
+			License, v. 3.0. If a copy of the GPL was not distributed with this
+			file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html.
+		</license>
+		<!-- Theme Files -->
+		<require-dir name="Themes" destination="$boarddir">Theme files</require-dir>
+		<!-- Source File -->
+		<require-dir name="Sources" destination="$boarddir">Source file</require-dir>
+		<!-- Database -->
+		<database>install.php</database>
+		<!-- Hooks -->
+		<hook hook="integrate_register" function="SimpleReferrals::save_referral" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_register_after" function="SimpleReferrals::update_count" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_admin_areas" function="SimpleReferrals::admin" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_manage_maintenance" function="SimpleReferrals::maint_recount" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_general_mod_settings" function="SimpleReferrals::settings" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_member_context" function="SimpleReferrals::member_context" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_load_member_data" function="SimpleReferrals::member_data" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" />
+		<!-- Redirect -->
+		<redirect url="?action=admin;area=modsettings">redirect.txt</redirect>
+	</install>
+	
+	<uninstall for="2.1 - 2.1.99, 2.1 RC4">
+		<!-- Hooks Remove -->
+		<hook hook="integrate_register" function="SimpleReferrals::save_referral" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_register_after" function="SimpleReferrals::update_count" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_admin_areas" function="SimpleReferrals::admin" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_manage_maintenance" function="SimpleReferrals::maint_recount" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_general_mod_settings" function="SimpleReferrals::settings" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_member_context" function="SimpleReferrals::member_context" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_load_member_data" function="SimpleReferrals::member_data" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<!-- Source File -->
+		<remove-file name="$sourcedir/SimpleReferrals.php">Source file</remove-file>
+		<!-- Template File -->
+		<remove-file name="$themedir/SimpleReferrals.template.php">Template file</remove-file>
+		<!-- Languages -->
+		<remove-dir name="$languagedir/SimpleReferrals">Language files</remove-dir>
+		<!-- Database -->
+		<database>install.php</database>
+	</uninstall>
+</package-info>
