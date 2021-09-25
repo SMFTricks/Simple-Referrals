@@ -15,6 +15,8 @@
 [li][size=9pt]Use a referral url with the referral id for easy share[/size][/li]
 [li][size=9pt]Display referral count in profile[/size][/li]
 [li][size=9pt]Display referral count in posts[/size][/li]
+[li][size=9pt]Display referral link in their profile[/size][/li]
+[li][size=9pt]Enable/disable the selection of searching users in the registration form[/size][/li]
 [li][size=9pt]Maintenance task for recounting the referral count of each user in the forum[/size][/li]
 [/list]
 

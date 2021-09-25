@@ -15,6 +15,8 @@
 - Use a referral url with the referral id for easy share
 - Display referral count in profile
 - Display referral count in posts
+- Display referral link in their profile
+- Enable/disable the selection of searching users in the registration form
 - Maintenance task for recounting the referral count of each user in the forum
 
 ## Requirements

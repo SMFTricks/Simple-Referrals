@@ -127,7 +127,7 @@ class SimpleReferrals
 	 */
 	public static function register()
 	{
-		global $context, $txt;
+		global $context, $txt, $modSettings;
 
 		// Help SMF remember the referral
 		if (!empty($context['agreement']) || !empty($context['privacy_policy']))
@@ -164,28 +164,32 @@ class SimpleReferrals
 			self::$_member_id = 0;
 		}
 
-		// Add fake custom field
-		$context['custom_fields'][] = [
-			'name' => tokenTxtReplace($txt['SimpleReferrals_referred']),
-			'desc' =>  tokenTxtReplace($txt['SimpleReferrals_referrer_desc']),
-			'input_html' => '
-				<input type="text" name="simple_referrer_name" id="simple_referrer_name" value="' . (!empty(self::$_member_data) ? self::$_member_data['name'] : (!empty($_REQUEST['simple_referrer_name']) && isset($_REQUEST['simple_referrer_name']) ? $_REQUEST['simple_referrer_name'] : '')) . '">' . (!empty(self::$_member_data) ? '
-				<input type="number" name="simple_referrer_id" id="simple_referrer_id" value="' . self::$_member_id . '" readonly size="'. strlen(self::$_member_id) . '">' : '') . '
-				<script>
-					var oAddMemberSuggest = new smc_AutoSuggest({
-						sSelf: \'oAddMemberSuggest\',
-						sSessionId: \'' . $context['session_id'] . '\',
-						sSessionVar: \'' . $context['session_var'] . '\',
-						sSuggestId: \'to_suggest\',
-						sControlId: \'simple_referrer_name\',
-						sSearchType: \'member\',
-						sPostName: \'simple_referrer_id\',
-						sURLMask: \'action=profile;u=%item_id%\',
-						sTextDeleteItem: \'' . $txt['autosuggest_delete_item'] . '\',
-					});
-				</script>',
-			'show_reg' => 1,
-		];
+		// Do we allow for selection? If not, don't display anything if there's no referral
+		if (empty($modSettings['SimpleReferrals_allow_select']) || !empty(self::$_member_id))
+		{
+			// Add fake custom field
+			$context['custom_fields'][] = [
+				'name' => tokenTxtReplace($txt['SimpleReferrals_referred']),
+				'desc' =>  tokenTxtReplace($txt['SimpleReferrals_referrer_desc']),
+				'input_html' => (empty($modSettings['SimpleReferrals_allow_select']) ? '
+					<input type="text" name="simple_referrer_name" id="simple_referrer_name" value="' . (!empty(self::$_member_data) ? self::$_member_data['name'] : (!empty($_REQUEST['simple_referrer_name']) && isset($_REQUEST['simple_referrer_name']) ? $_REQUEST['simple_referrer_name'] : '')) . '">' : '') . (!empty(self::$_member_data) ? '
+					<input type="number" name="simple_referrer_id" id="simple_referrer_id" value="' . self::$_member_id . '" readonly size="'. strlen(self::$_member_id) . '">' : '') . '
+					<script>
+						var oAddMemberSuggest = new smc_AutoSuggest({
+							sSelf: \'oAddMemberSuggest\',
+							sSessionId: \'' . $context['session_id'] . '\',
+							sSessionVar: \'' . $context['session_var'] . '\',
+							sSuggestId: \'to_suggest\',
+							sControlId: \'simple_referrer_name\',
+							sSearchType: \'member\',
+							sPostName: \'simple_referrer_id\',
+							sURLMask: \'action=profile;u=%item_id%\',
+							sTextDeleteItem: \'' . $txt['autosuggest_delete_item'] . '\',
+						});
+					</script>',
+				'show_reg' => 1,
+			];
+		}
 	}
 
 	/**
@@ -197,7 +201,7 @@ class SimpleReferrals
 	 */
 	public static function profile()
 	{
-		global $context, $txt, $modSettings;
+		global $context, $txt, $modSettings, $scripturl;
 
 		// Is it enabled for display in the profile
 		if (!empty($modSettings['SimpleReferrals_enable_profile']))
@@ -205,6 +209,15 @@ class SimpleReferrals
 				'name' => $txt['SimpleReferrals_count_total'],
 				'colname' => 'ref_count',
 				'output_html' => $context['member']['ref_count'],
+				'placement' => 0,
+			];
+
+		// Add their referral link?
+		if (!empty($modSettings['SimpleReferrals_display_link']))
+			$context['custom_fields'][] = [
+				'name' => $txt['SimpleReferrals_link'],
+				'colname' => 'ref_link',
+				'output_html' => '<input type="text" readonly value="' . $scripturl . '?action=signup;referral=' . $context['member']['id'] . '" size="50">',
 				'placement' => 0,
 			];
 	}
@@ -297,9 +310,13 @@ class SimpleReferrals
 	 */
 	public static function settings(&$config_vars)
 	{
+		global $txt;
+
 		$config_vars []= ['title', 'SimpleReferrals_settings'];
+		$config_vars []= ['check', 'SimpleReferrals_allow_select', 'subtext' => $txt['SimpleReferrals_allow_select_desc']];
 		$config_vars []= ['check', 'SimpleReferrals_enable_profile'];
 		$config_vars []= ['check', 'SimpleReferrals_enable_posts'];
+		$config_vars []= ['check', 'SimpleReferrals_display_link'];
 	}
 
 	/**

@@ -11,9 +11,14 @@
 $txt['SimpleReferrals_referred'] = 'Referred by';
 $txt['SimpleReferrals_referrer_desc'] = 'The member that referred you to the forum.';
 $txt['SimpleReferrals_count_total'] = 'Total Referrals';
+$txt['SimpleReferrals_link'] = 'Referral Link';
+
 $txt['maintain_referrals'] = 'Referrals';
 $txt['maintain_recountreferrals'] = 'Recount User Referrals';
 $txt['maintain_recountreferrals_info'] = 'Run this maintenance task to update your users referral count. It will recount all (countable) referrals they have and then update their profile referral totals';
 $txt['SimpleReferrals_settings'] = 'Simple Referrals Settings';
+$txt['SimpleReferrals_allow_select'] = 'Only allow direct links';
+$txt['SimpleReferrals_allow_select_desc'] = 'If enabled, guests will not be able to find/set forum users in the signup form, can only use direct referral links.';
 $txt['SimpleReferrals_enable_posts'] = 'Enable referrals count in posts';
 $txt['SimpleReferrals_enable_profile'] = 'Enable referrals count in profile';
+$txt['SimpleReferrals_display_link'] = 'Display the referral link in profile';
