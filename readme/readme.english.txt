@@ -1,6 +1,6 @@
 [center][url=https://smftricks.com][img]https://smftricks.com/logos/logo.png[/img][/url][/center]
 
-[img]https://img.shields.io/badge/License-GPL 3.0a05a3f?style=flat-square[/img] [img]https://img.shields.io/badge/SMF-2.1-3f73a0?style=flat-square[/img]
+[img]https://img.shields.io/badge/License-GPL 3.0-a05a3f?style=flat-square[/img] [img]https://img.shields.io/badge/SMF-2.1-3f73a0?style=flat-square[/img]
 
 
 [b][size=14pt]Simple Referrals[/size][/b]
