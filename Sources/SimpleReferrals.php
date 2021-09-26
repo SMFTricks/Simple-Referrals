@@ -259,7 +259,7 @@ class SimpleReferrals
 	 * @param int $user The ID of a user previously loaded by {@link loadMemberData()}
 	 * @return void
 	 */
-	public function member_context(&$data, $user)
+	public static function member_context(&$data, $user)
 	{
 		global $user_profile, $modSettings, $txt, $topic;
 
