@@ -169,8 +169,8 @@ class SimpleReferrals
 		{
 			// Add fake custom field
 			$context['custom_fields'][] = [
-				'name' => tokenTxtReplace($txt['SimpleReferrals_referred']),
-				'desc' =>  tokenTxtReplace($txt['SimpleReferrals_referrer_desc']),
+				'name' => $txt['SimpleReferrals_referred'],
+				'desc' => $txt['SimpleReferrals_referrer_desc'],
 				'input_html' => (empty($modSettings['SimpleReferrals_allow_select']) ? '
 					<input type="text" name="simple_referrer_name" id="simple_referrer_name" value="' . (!empty(self::$_member_data) ? self::$_member_data['name'] : (!empty($_REQUEST['simple_referrer_name']) && isset($_REQUEST['simple_referrer_name']) ? $_REQUEST['simple_referrer_name'] : '')) . '">' : '') . (!empty(self::$_member_data) ? '
 					<input type="number" name="simple_referrer_id" id="simple_referrer_id" value="' . self::$_member_id . '" readonly size="'. strlen(self::$_member_id) . '">' : '') . '
