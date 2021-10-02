@@ -2,7 +2,7 @@
 
 /**
  * @package Simple Referrals
- * @version 1.0
+ * @version 1.2
  * @author Diego Andrés <diegoandres_cortes@outlook.com>
  * @copyright Copyright (c) 2021, SMF Tricks
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -82,6 +82,9 @@ class SimpleReferrals
 					$smcFunc['db_free_result']($request);
 				}
 
+				// Update the session with the input user? I don't think it's relevant for the mod, but will leave here just in case
+				// $_SESSION['signup_referral'] = (int) self::$_member_id;
+
 				// Insert the value
 				$regOptions['register_vars']['referral'] = self::$_member_id;
 
@@ -115,6 +118,10 @@ class SimpleReferrals
 				]
 			);
 		}
+
+		// If we still have the referral in the session, remove it
+		if (isset($_SESSION['signup_referral']))
+			unset($_SESSION['signup_referral']);
 	}
 
 	/**
@@ -129,21 +136,15 @@ class SimpleReferrals
 	{
 		global $context, $txt, $modSettings;
 
-		// Help SMF remember the referral
-		if (!empty($context['agreement']) || !empty($context['privacy_policy']))
-		{
-			if (!empty($context['agreement']))
-				$context['agreement'] .= '<input type="hidden" name="referral" value="' . (isset($_REQUEST['referral']) && !empty($_REQUEST['referral']) ? (int) $_REQUEST['referral'] : '') . '">';
-			else
-				$context['privacy_policy'] .= '<input type="hidden" name="referral" value="' . (isset($_REQUEST['referral']) && !empty($_REQUEST['referral']) ? (int) $_REQUEST['referral'] : '') . '">';
-		}
+		// Save the referral in the session
+		$_SESSION['signup_referral'] = (int) (isset($_REQUEST['referral']) && !empty($_REQUEST['referral']) ? $_REQUEST['referral'] : (isset($_SESSION['signup_referral']) && !empty($_SESSION['signup_referral']) ? $_SESSION['signup_referral'] : 0));
 
 		// Auto suggest
 		loadJavaScriptFile('suggest.js', array('defer' => false, 'minimize' => true), 'smf_suggest');
 
-		// Do we have a referrer in the url?
-		if (!empty($_REQUEST['referral']) && isset($_REQUEST['referral']))
-			self::$_member_id = (int) $_REQUEST['referral'];
+		// Do we have a referrer in the session/url?
+		if (!empty($_SESSION['signup_referral']) && isset($_SESSION['signup_referral']))
+			self::$_member_id = (int) $_SESSION['signup_referral'];
 		// Maybe we are returning to some errors?
 		elseif (!empty($_REQUEST['simple_referrer_id']) && isset($_REQUEST['simple_referrer_id']))
 			self::$_member_id = (int) $_REQUEST['simple_referrer_id'];
