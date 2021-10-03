@@ -21,7 +21,7 @@
 [/list]
 
 [size=12pt][color=maroon]Languages[/color][/size]
-[img]https://www.simplemachines.org/site_images/lang/english.gif[/img]
+[img]https://www.simplemachines.org/site_images/lang/english.gif[/img] [img]https://www.simplemachines.org/site_images/lang/russian.gif[/img]
 [hr]
 [size=12pt][color=purple][url=https://github.com/SMFTricks/Simple-Referrals]GitHub[/url][/color][/size]
 [size=12pt][color=navy][url=https://smftricks.com/index.php?topic=2202.0]Changelog[/url][/color][/size]

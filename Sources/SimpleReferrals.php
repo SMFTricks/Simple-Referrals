@@ -86,7 +86,7 @@ class SimpleReferrals
 				// $_SESSION['signup_referral'] = (int) self::$_member_id;
 
 				// Insert the value
-				$regOptions['register_vars']['referral'] = self::$_member_id;
+				$regOptions['register_vars']['referral'] = (int) self::$_member_id;
 
 				// Both are integers
 				$knownInts[] = 'referral';
@@ -117,6 +117,9 @@ class SimpleReferrals
 					'user' => $regOptions['register_vars']['referral'],
 				]
 			);
+
+			// Are we doing anything else with this?
+			call_integration_hook('integrate_mod_simplereferrals', [$regOptions['register_vars']['referral']]);
 		}
 
 		// If we still have the referral in the session, remove it
