@@ -32,7 +32,7 @@
 		<hook hook="integrate_load_member_data" function="SimpleReferrals::member_data" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" />
 		<!-- Redirect -->
-		<redirect url="?action=admin;area=modsettings">redirect.txt</redirect>
+		<redirect url="?action=admin;area=modsettings" />
 	</install>
 	
 	<uninstall for="2.1 - 2.1.99, 2.1 RC4">
