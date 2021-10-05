@@ -2,7 +2,7 @@
 
 /**
  * @package Simple Referrals
- * @version 1.2
+ * @version 1.3.1
  * @author Diego Andrés <diegoandres_cortes@outlook.com>
  * @copyright Copyright (c) 2021, SMF Tricks
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -27,7 +27,7 @@ class SimpleReferrals
 	 * SimpleReferrals::custom_fields()
 	 *
 	 * Loads custom profile fields
-	 * 
+	 *
 	 * @param int $user The ID of a user previously loaded by {@link loadMemberData()}
 	 * @param array $area An array containing the action areas
 	 * @return void
@@ -51,7 +51,7 @@ class SimpleReferrals
 	 *
 	 * It includes the referral in the member newly created account,
 	 * as well as attempting to find the referral found in the form.
-	 * 
+	 *
 	 * @param array $regOptions The register options
 	 * @return void
 	 */
@@ -98,7 +98,7 @@ class SimpleReferrals
 	 * SimpleReferrals::update_count()
 	 *
 	 * Updates a member ref_count if set as the referral
-	 * 
+	 *
 	 * @param array $regOptions The register options
 	 * @return void
 	 */
@@ -132,7 +132,7 @@ class SimpleReferrals
 	 *
 	 * Inserts a fake custom field in the register/signup view. It also does all the 
 	 * checkings in case of errors and other unexpected situations.
-	 * 
+	 *
 	 * @return void
 	 */
 	public static function register()
@@ -200,7 +200,7 @@ class SimpleReferrals
 	 * SimpleReferrals::profile()
 	 *
 	 * Inserts the custom field in the profile view
-	 * 
+	 *
 	 * @return void
 	 */
 	public static function profile()
@@ -230,7 +230,7 @@ class SimpleReferrals
 	 * SimpleReferrals::member_data()
 	 *
 	 * Include referral count in loadMemberData
-	 * 
+	 *
 	 * @param string $columns The member columns
 	 * @param string $tablws Any additional tables
 	 * @param string $set What kind of data to load (normal, profile, minimal)
@@ -258,7 +258,7 @@ class SimpleReferrals
 	 * SimpleReferrals::member_context()
 	 *
 	 * Referrals count
-	 * 
+	 *
 	 * @param array $data The monstrous array of user information
 	 * @param int $user The ID of a user previously loaded by {@link loadMemberData()}
 	 * @return void
@@ -290,7 +290,7 @@ class SimpleReferrals
 	 * SimpleReferrals::admin()
 	 *
 	 * Adds the maintainance tab to the menu and sections
-	 * 
+	 *
 	 * @param array $areas The monstrous admin array
 	 * @return void
 	 */
@@ -308,7 +308,7 @@ class SimpleReferrals
 	 * SimpleReferrals::settings()
 	 *
 	 * Adds the settings to the mods settings page
-	 * 
+	 *
 	 * @param array $config_vars The mod settings array
 	 * @return void
 	 */
@@ -327,7 +327,7 @@ class SimpleReferrals
 	 * SimpleReferrals::maint_recount()
 	 *
 	 * Adds the maintainance area to the sections
-	 * 
+	 *
 	 * @param array $areas The maint areas array
 	 * @return void
 	 */
@@ -350,7 +350,7 @@ class SimpleReferrals
 	 * SimpleReferrals::maintain_recount()
 	 *
 	 * Returns a finished message after running the task
-	 * 
+	 *
 	 * @return void
 	 */
 	public static function maintain_recount()
@@ -366,7 +366,7 @@ class SimpleReferrals
 	 *
 	 * Mimics the posts recount of smf, but it recounts the referrals for each user,
 	 * and cleans those that didn't actually have referrals
-	 * 
+	 *
 	 * @return void
 	 */
 	public static function do_recount()
