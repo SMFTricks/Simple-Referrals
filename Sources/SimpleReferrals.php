@@ -100,11 +100,12 @@ class SimpleReferrals
 	 * Updates a member ref_count if set as the referral
 	 *
 	 * @param array $regOptions The register options
+	 * @param int $memberID The id of the newly registered member
 	 * @return void
 	 */
-	public static function update_count($regOptions)
+	public static function update_count($regOptions, $memberID)
 	{
-		global $smcFunc;
+		global $smcFunc, $modSettings;
 
 		// Do a checking just in case something is broken
 		if (!empty($regOptions['register_vars']['referral']))
@@ -118,8 +119,9 @@ class SimpleReferrals
 				]
 			);
 
-			// Are we doing anything else with this?
-			call_integration_hook('integrate_mod_simplereferrals', [$regOptions['register_vars']['referral']]);
+			// Send an alert?
+			if (!empty($modSettings['SimpleReferrals_send_alerts']))
+				self::sendAlert($regOptions['register_vars'], $memberID);
 		}
 
 		// If we still have the referral in the session, remove it
@@ -360,6 +362,7 @@ class SimpleReferrals
 			['check', 'SimpleReferrals_enable_posts'],
 			['check', 'SimpleReferrals_display_link'],
 			['check', 'SimpleReferrals_enable_stats'],
+			['check', 'SimpleReferrals_send_alerts'],
 		];
 
 		// Return config vars
@@ -614,5 +617,109 @@ class SimpleReferrals
 			foreach ($context['stats_blocks']['most_referrals'] as $i => $referral_count)
 				$context['stats_blocks']['most_referrals'][$i]['percent'] = round(($referral_count['num'] * 100) / $max_referrals);
 		}
+	}
+
+	/**
+	 * SimpleReferrals::alertTypes()
+	 *
+	 * Adds the top referrers in the forum 
+	 *
+	 * @param array $alert_types The type of content/alerts
+	 * @return void
+	 */
+	public static function alertTypes(&$alert_types)
+	{
+		global $modSettings;
+
+		// No alertts, no fun
+		if (empty($modSettings['SimpleReferrals_send_alerts']))
+			return;
+
+		// Language
+		loadLanguage('SimpleReferrals/');
+
+		$alert_types['referrals'] = [
+				'new_referred' => ['alert' => 'yes', 'email' => 'never'],
+		];
+	}
+
+	/**
+	 * SimpleReferrals::alertFetch()
+	 *
+	 * Fetch the alert fot the user
+	 *
+	 * @param array $alerts The alerts being sent out
+	 * @return void
+	 */
+	public static function alertFetch(&$alerts)
+	{
+		global $settings, $scripturl, $modSettings;
+
+		// No alertts, no fun
+		if (empty($modSettings['SimpleReferrals_send_alerts']))
+			return;
+
+		// Language
+		loadLanguage('SimpleReferrals/');
+
+		foreach ($alerts as $alert_id => $alert)
+		{
+			if ($alert['content_type'] == 'referral')
+			{
+				$alerts[$alert_id]['icon'] = '<img class="alert_icon" src="' . $settings['images_url'] . '/icons/most_referrals.png">';
+				$alerts[$alert_id]['extra']['content_link'] = $scripturl . $alert['extra']['referred_link'];
+			}
+		}
+	}
+
+	/**
+	 * SimpleReferrals::sendAlert()
+	 *
+	 * Send an alert to the referral
+	 *
+	 * @param array $register_vars Contains $regOptions['register_vars']
+	 * @param int $memID It's the id of the referred user
+	 * @return void
+	 */
+	public static function sendAlert($register_vars, $memID)
+	{
+		global $smcFunc, $sourcedir;
+
+		require_once($sourcedir . '/Subs-Notify.php');
+		$prefs = getNotifyPrefs($register_vars['referral'], 'new_referred', true);
+
+		// Send alert
+		// Check the value. If no value or it's empty, they didn't want alerts, oh well.
+		if (empty($prefs[$register_vars['referral']]['new_referred']))
+			return true;
+
+		// Issue, update, move on.
+		$smcFunc['db_insert']('insert',
+			'{db_prefix}user_alerts',
+			[
+				'alert_time' => 'int',
+				'id_member' => 'int',
+				'id_member_started' => 'int',
+				'member_name' => 'string',
+				'content_type' => 'string',
+				'content_id' => 'int',
+				'content_action' => 'string',
+				'is_read' => 'int',
+				'extra' => 'string'
+			],
+			[
+				time(),
+				$register_vars['referral'],
+				$memID,
+				$register_vars['real_name'],
+				'referral',
+				$memID,
+				'new_referred',
+				0,
+				$smcFunc['json_encode'](['referred_link' => '?action=profile;u=' . $memID])
+			],
+			['id_alert']
+		);
+		updateMemberData($register_vars['referral'], ['alerts' => '+']);
 	}
 }

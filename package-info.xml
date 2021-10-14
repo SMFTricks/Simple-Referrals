@@ -33,6 +33,8 @@
 		<hook hook="integrate_member_context" function="SimpleReferrals::member_context" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_load_member_data" function="SimpleReferrals::member_data" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_alert_types" function="SimpleReferrals::alertTypes" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_fetch_alerts" function="SimpleReferrals::alertFetch" file="$sourcedir/SimpleReferrals.php" />
 		<!-- Redirect -->
 		<redirect url="?action=admin;area=modsettings;sa=referrals" />
 	</install>
@@ -48,6 +50,8 @@
 		<hook hook="integrate_member_context" function="SimpleReferrals::member_context" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_load_member_data" function="SimpleReferrals::member_data" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_alert_types" function="SimpleReferrals::alertTypes" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_fetch_alerts" function="SimpleReferrals::alertFetch" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<!-- Source File -->
 		<remove-file name="$sourcedir/SimpleReferrals.php">Source file</remove-file>
 		<!-- Template File -->
