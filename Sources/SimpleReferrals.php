@@ -169,7 +169,7 @@ class SimpleReferrals
 		}
 
 		// Do we allow for selection? If not, don't display anything if there's no referral
-		if (empty($modSettings['SimpleReferrals_allow_select']) || !empty(self::$_member_id))
+		if (empty($modSettings['SimpleReferrals_allow_select']) || (!empty($modSettings['SimpleReferrals_allow_select']) && !empty(self::$_member_data)))
 		{
 			// Add fake custom field
 			$context['custom_fields'][] = [
@@ -305,6 +305,38 @@ class SimpleReferrals
 	}
 
 	/**
+	 * SimpleReferrals::subaction()
+	 *
+	 * Append the subaction
+	 *
+	 * @param array $subActions mod settings subactions
+	 * @return void
+	 */
+	public static function mod_settings(&$subActions)
+	{
+		$subActions['referrals'] = 'SimpleReferrals::settings';
+	}
+
+	/**
+	 * SimpleReferrals::admin_area()
+	 *
+	 * Insert the button in the menu
+	 *
+	 * @param array $admin_areas The admin menu
+	 * @return void
+	 */
+	public static function admin_area(&$admin_areas)
+	{
+		global $txt;
+
+		// Load the language file
+		loadLanguage('SimpleReferrals/');
+
+		// Add the new setting area
+		$admin_areas['config']['areas']['modsettings']['subsections']['referrals'] = [$txt['SimpleReferrals_settings']];
+	}
+
+	/**
 	 * SimpleReferrals::settings()
 	 *
 	 * Adds the settings to the mods settings page
@@ -312,15 +344,36 @@ class SimpleReferrals
 	 * @param array $config_vars The mod settings array
 	 * @return void
 	 */
-	public static function settings(&$config_vars)
+	public static function settings($return_config = false)
 	{
-		global $txt;
+		global $context, $txt, $scripturl;
 
-		$config_vars []= ['title', 'SimpleReferrals_settings'];
-		$config_vars []= ['check', 'SimpleReferrals_allow_select', 'subtext' => $txt['SimpleReferrals_allow_select_desc']];
-		$config_vars []= ['check', 'SimpleReferrals_enable_profile'];
-		$config_vars []= ['check', 'SimpleReferrals_enable_posts'];
-		$config_vars []= ['check', 'SimpleReferrals_display_link'];
+		$context['post_url'] = $scripturl . '?action=admin;area=modsettings;sa=referrals;save';
+		$context['sub_template'] = 'show_settings';
+		$context['settings_title'] = $txt['SimpleReferrals_settings'];
+		$context['page_title'] .= ' - ' . $txt['SimpleReferrals_settings'];
+
+		// $config_vars []= ['title', 'SimpleReferrals_settings'];
+		$config_vars = [
+			['check', 'SimpleReferrals_allow_select', 'subtext' => $txt['SimpleReferrals_allow_select_desc']],
+			['check', 'SimpleReferrals_enable_profile'],
+			['check', 'SimpleReferrals_enable_posts'],
+			['check', 'SimpleReferrals_display_link'],
+			['check', 'SimpleReferrals_enable_stats'],
+		];
+
+		// Return config vars
+		if ($return_config)
+			return $config_vars;
+
+		// Saving?
+		if (isset($_GET['save'])) {
+			checkSession();
+			saveDBSettings($config_vars);
+			clean_cache();
+			redirectexit('action=admin;area=modsettings;sa=referrals');
+		}
+		prepareDBSettingContext($config_vars);
 	}
 
 	/**
@@ -504,5 +557,62 @@ class SimpleReferrals
 		unset($_SESSION['total_referrals']);
 		$context['maintenance_finished'] = $txt['maintain_recountreferrals'];
 		redirectexit('action=admin;area=maintain;sa=referrals;done=recountreferrals');
+	}
+
+	/**
+	 * SimpleReferrals::forum_stats()
+	 *
+	 * Adds the top referrers in the forum 
+	 *
+	 * @return void
+	 */
+	public function forum_stats()
+	{
+		global $smcFunc, $context, $scripturl, $settings, $modSettings;
+
+		// Referrals Top.
+		if (!empty($modSettings['SimpleReferrals_enable_stats']))
+		{
+			// Ref language
+			loadLanguage('SimpleReferrals/');
+
+			// Template
+			loadTemplate('SimpleReferrals');
+
+			// Add the icon without adding a css file...
+			addInlineCss('
+				.main_icons.most_referrals::before {
+					background: url('. $settings['default_images_url'] . '/icons/most_referrals.png);
+				}
+			');
+
+			// Top 10 referrals
+			$context['stats_blocks']['most_referrals'] = [];
+			$max_referrals = 1;
+			$request = $smcFunc['db_query']('', '
+				SELECT mem.ref_count, mem.id_member, mem.real_name
+				FROM {db_prefix}members AS mem
+				WHERE mem.ref_count > 0
+				ORDER BY mem.ref_count DESC
+				LIMIT 10',
+				[]
+			);
+			while ($ref_row = $smcFunc['db_fetch_assoc']($request))
+			{
+				$context['stats_blocks']['most_referrals'][] = [
+					'id' => $ref_row['id_member'],
+					'num' => $ref_row['ref_count'],
+					'link' => '<a href="' . $scripturl . '?action=profile;u=' . $ref_row['id_member'] . '">' . $ref_row['real_name'] . '</a>',
+				];
+
+				if ($max_referrals < $ref_row['ref_count'])
+					$max_referrals = $ref_row['ref_count'];
+			}
+			$smcFunc['db_free_result']($request);
+
+			// Percentage
+			foreach ($context['stats_blocks']['most_referrals'] as $i => $referral_count)
+				$context['stats_blocks']['most_referrals'][$i]['percent'] = round(($referral_count['num'] * 100) / $max_referrals);
+		}
 	}
 }
