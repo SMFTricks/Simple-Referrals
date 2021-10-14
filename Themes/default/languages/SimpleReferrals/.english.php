@@ -22,3 +22,7 @@ $txt['SimpleReferrals_allow_select_desc'] = 'If enabled, guests will not be able
 $txt['SimpleReferrals_enable_posts'] = 'Enable referrals count in posts';
 $txt['SimpleReferrals_enable_profile'] = 'Enable referrals count in profile';
 $txt['SimpleReferrals_display_link'] = 'Display the referral link in profile';
+
+// Stats
+$txt['SimpleReferrals_enable_stats'] = 'Display top referrers in the forum stats';
+$txt['top_most_referrals'] = 'Most referrals';
