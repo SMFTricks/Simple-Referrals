@@ -3,7 +3,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>smftricks:simplereferrals</id>
 	<name>Simple Referrals</name>
-	<version>1.4</version>
+	<version>1.4.1</version>
 	<type>modification</type>
 	<install for="2.1 - 2.1.99, 2.1 RC4">
 		<!-- Mod Readme -->
