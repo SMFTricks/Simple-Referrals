@@ -29,6 +29,6 @@ $txt['top_most_referrals'] = 'Most referrals';
 
 // Alerts
 $txt['SimpleReferrals_send_alerts'] = 'Send alert to referrals upon new registrations';
-$txt['alert_group_referrals'] = $txt['maintain_referrals'];
+$txt['alert_group_referrals'] = $txt['maintain_referrals'];							// Don't translate
 $txt['alert_new_referred'] = 'When someone signs up using my referral link';
 $txt['alert_referral_new_referred'] = '{member_link} just used your referral link';
