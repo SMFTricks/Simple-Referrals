@@ -3,7 +3,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>smftricks:simplereferrals</id>
 	<name>Simple Referrals</name>
-	<version>1.4.1</version>
+	<version>1.4.2</version>
 	<type>modification</type>
 	<install for="2.1 - 2.1.99, 2.1 RC4">
 		<!-- Mod Readme -->
@@ -35,6 +35,7 @@
 		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_alert_types" function="SimpleReferrals::alertTypes" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_fetch_alerts" function="SimpleReferrals::alertFetch" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_forum_stats" function="SimpleReferrals::forum_stats" file="$sourcedir/SimpleReferrals.php" />
 		<!-- Redirect -->
 		<redirect url="?action=admin;area=modsettings;sa=referrals" />
 	</install>
@@ -52,6 +53,7 @@
 		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_alert_types" function="SimpleReferrals::alertTypes" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_fetch_alerts" function="SimpleReferrals::alertFetch" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_forum_stats" function="SimpleReferrals::forum_stats" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<!-- Source File -->
 		<remove-file name="$sourcedir/SimpleReferrals.php">Source file</remove-file>
 		<!-- Template File -->
