@@ -2,7 +2,7 @@
 
 /**
  * @package Simple Referrals
- * @version 1.3.1
+ * @version 1.4.2
  * @author Diego Andrés <diegoandres_cortes@outlook.com>
  * @copyright Copyright (c) 2021, SMF Tricks
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -574,49 +574,55 @@ class SimpleReferrals
 		global $smcFunc, $context, $scripturl, $settings, $modSettings;
 
 		// Referrals Top.
-		if (!empty($modSettings['SimpleReferrals_enable_stats']))
-		{
-			// Ref language
-			loadLanguage('SimpleReferrals/');
+		if (empty($modSettings['SimpleReferrals_enable_stats']))
+			return;
 
-			// Template
-			loadTemplate('SimpleReferrals');
+		// Ref language
+		loadLanguage('SimpleReferrals/');
 
-			// Add the icon without adding a css file...
-			addInlineCss('
-				.main_icons.most_referrals::before {
-					background: url('. $settings['default_images_url'] . '/icons/most_referrals.png);
-				}
-			');
+		// Template
+		loadTemplate('SimpleReferrals');
 
-			// Top 10 referrals
-			$context['stats_blocks']['most_referrals'] = [];
-			$max_referrals = 1;
-			$request = $smcFunc['db_query']('', '
-				SELECT mem.ref_count, mem.id_member, mem.real_name
-				FROM {db_prefix}members AS mem
-				WHERE mem.ref_count > 0
-				ORDER BY mem.ref_count DESC
-				LIMIT 10',
-				[]
-			);
-			while ($ref_row = $smcFunc['db_fetch_assoc']($request))
-			{
-				$context['stats_blocks']['most_referrals'][] = [
-					'id' => $ref_row['id_member'],
-					'num' => $ref_row['ref_count'],
-					'link' => '<a href="' . $scripturl . '?action=profile;u=' . $ref_row['id_member'] . '">' . $ref_row['real_name'] . '</a>',
-				];
-
-				if ($max_referrals < $ref_row['ref_count'])
-					$max_referrals = $ref_row['ref_count'];
+		// Add the icon without adding a css file...
+		addInlineCss('
+			.main_icons.most_referrals::before {
+				background: url('. $settings['default_images_url'] . '/icons/most_referrals.png);
 			}
-			$smcFunc['db_free_result']($request);
+		');
 
-			// Percentage
-			foreach ($context['stats_blocks']['most_referrals'] as $i => $referral_count)
-				$context['stats_blocks']['most_referrals'][$i]['percent'] = round(($referral_count['num'] * 100) / $max_referrals);
+		// Top 10 referrals
+		$max_referrals = 1;
+		$request = $smcFunc['db_query']('', '
+			SELECT mem.ref_count, mem.id_member, mem.real_name
+			FROM {db_prefix}members AS mem
+			WHERE mem.ref_count > 0
+			ORDER BY mem.ref_count DESC
+			LIMIT 10',
+			[]
+		);
+
+		// Don't do anything if there are no referrals
+		if (empty($smcFunc['db_num_rows']($request)))
+			return;
+
+		// Setup the block
+		$context['stats_blocks']['most_referrals'] = [];
+		while ($ref_row = $smcFunc['db_fetch_assoc']($request))
+		{
+			$context['stats_blocks']['most_referrals'][] = [
+				'id' => $ref_row['id_member'],
+				'num' => $ref_row['ref_count'],
+				'link' => '<a href="' . $scripturl . '?action=profile;u=' . $ref_row['id_member'] . '">' . $ref_row['real_name'] . '</a>',
+			];
+
+			if ($max_referrals < $ref_row['ref_count'])
+				$max_referrals = $ref_row['ref_count'];
 		}
+		$smcFunc['db_free_result']($request);
+
+		// Percentage
+		foreach ($context['stats_blocks']['most_referrals'] as $i => $referral_count)
+			$context['stats_blocks']['most_referrals'][$i]['percent'] = round(($referral_count['num'] * 100) / $max_referrals);
 	}
 
 	/**
