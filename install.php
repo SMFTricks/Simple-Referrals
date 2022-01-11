@@ -2,7 +2,7 @@
 
 /**
  * @package Simple Referrals
- * @version 1.3
+ * @version 1.4.2
  * @author Diego Andrés <diegoandres_cortes@outlook.com>
  * @copyright Copyright (c) 2021, SMF Tricks
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -43,5 +43,24 @@ elseif (!defined('SMF'))
 				'not_null' => true,
 				'unsigned' => true,
 			]
+		);
+
+		// Enable the alert by default
+		$smcFunc['db_insert'](
+			'ignore',
+			'{db_prefix}user_alerts_prefs',
+			[
+				'id_member' => 'int',
+				'alert_pref' => 'string',
+				'alert_value' => 'int',
+			],
+			[
+				[
+					0,
+					'new_referred',
+					1,
+				],
+			],
+			['id_task']
 		);
 	}
