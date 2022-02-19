@@ -3,9 +3,9 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>smftricks:simplereferrals</id>
 	<name>Simple Referrals</name>
-	<version>1.4.2</version>
+	<version>1.4.3</version>
 	<type>modification</type>
-	<install for="2.1 - 2.1.99, 2.1 RC4">
+	<install for="2.1 - 2.1.99">
 		<!-- Mod Readme -->
 		<readme lang="english" parsebbc="true" type="file">readme/readme.english.txt</readme>
 		<!-- Credits -->
@@ -40,7 +40,7 @@
 		<redirect url="?action=admin;area=modsettings;sa=referrals" />
 	</install>
 	
-	<uninstall for="2.1 - 2.1.99, 2.1 RC4">
+	<uninstall for="2.1 - 2.1.99">
 		<!-- Hooks Remove -->
 		<hook hook="integrate_register" function="SimpleReferrals::save_referral" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_register_after" function="SimpleReferrals::update_count" file="$sourcedir/SimpleReferrals.php" reverse="true" />
