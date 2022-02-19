@@ -1,16 +1,14 @@
- <p align="center">
-    <img src="https://smftricks.com/logos/logo.png">
- </p>
+![SMF Tricks - Free & Premium Mods and Themes for SMF](https://smftricks.com/logos/logo.png)
 
-# Simple-Referrals
-<img src="https://img.shields.io/badge/License-GPL 3.0-a05a3f?style=flat-square"> <img src="https://img.shields.io/badge/SMF-2.1-3f73a0?style=flat-square">
+# Simple Referrals
+![License](https://img.shields.io/badge/License-GPL%203.0-248049) ![Hooks Only](https://img.shields.io/badge/Hooks%20Only-Yes-6041a3) ![SMF 2.1](https://img.shields.io/badge/SMF-2.1-3f73a0)
 
-* Developed by [Diego Andrés](https://github.com/DiegoAndresCortes)
+Developed by [Diego Andrés](https://github.com/DiegoAndresCortes)
 
 ## Introduction
-* Simple Referrals implements a referrals system to your forum.
+Simple Referrals implements a referrals system to your forum.
 
-## Features
+### Features
 - Set a referral using autosuggest in the registration form
 - Use a referral url with the referral id for easy share
 - Display referral count in profile
@@ -18,12 +16,7 @@
 - Display referral link in their profile
 - Enable/disable the selection of searching users in the registration form
 - Maintenance task for recounting the referral count of each user in the forum
-
-## Requirements
-* Simple Referrals can be installed on SMF 2.1
-
-## How to install
-* You can install Simple Referrals through the package manager of your forum administration.
-
-## Changelog
-You can find the changelog for Simple Referrals on SMF Tricks: [Changelog](https://smftricks.com/index.php?topic=2202.0)
+- Top referrers statistics
+---
+### [Changelog](https://github.com/SMFTricks/Simple-Referrals/blob/main/CHANGELOG.md)
+### [GitHub](https://github.com/SMFTricks/Simple-Referrals)
