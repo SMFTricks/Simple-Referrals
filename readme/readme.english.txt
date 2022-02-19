@@ -22,8 +22,10 @@
 [li][size=0.9em]Top referrers statistics[/size][/li]
 [/list]
 
-[size=3][color=#358234]Languages[/color][/size]
-[img]https://www.simplemachines.org/site_images/lang/english.gif[/img] [img]https://www.simplemachines.org/site_images/lang/russian.gif[/img] [img]https://www.simplemachines.org/site_images/lang/portuguese_pt.gif[/img]
+[size=3][color=#358234]Localization[/color][/size]
+[img]https://www.simplemachines.org/site_images/lang/english.gif[/img] English
+[img]https://www.simplemachines.org/site_images/lang/russian.gif[/img] Russian by [url="https://www.simplemachines.org/community/index.php?action=profile;u=229017"]Bugo[/url]
+[img]https://www.simplemachines.org/site_images/lang/portuguese_pt.gif[/img] Portuguese [size=1](PT)[/size] by [url="https://www.simplemachines.org/community/index.php?action=profile;u=144998"]Dr Web[/url]
 [hr]
 
 [size=3][url="https://github.com/SMFTricks/Simple-Referrals/blob/main/CHANGELOG.md"][color=#cc5d31]Changelog[/color][/url][/size]

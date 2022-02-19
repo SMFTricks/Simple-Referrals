@@ -17,6 +17,11 @@ Simple Referrals implements a referrals system to your forum.
 - Enable/disable the selection of searching users in the registration form
 - Maintenance task for recounting the referral count of each user in the forum
 - Top referrers statistics
+
+### Localization
+- ![English](https://www.simplemachines.org/site_images/lang/english.gif) English
+- ![Russian](https://www.simplemachines.org/site_images/lang/russian.gif) Russian by [Bugo](https://www.simplemachines.org/community/index.php?action=profile;u=229017)
+- ![Portuguese](https://www.simplemachines.org/site_images/lang/portuguese_pt.gif) Portuguese by [Dr Web](https://www.simplemachines.org/community/index.php?action=profile;u=144998)
 ---
 ### [Changelog](https://github.com/SMFTricks/Simple-Referrals/blob/main/CHANGELOG.md)
 ### [GitHub](https://github.com/SMFTricks/Simple-Referrals)
