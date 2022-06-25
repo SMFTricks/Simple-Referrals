@@ -1,5 +1,8 @@
 # Changelog
 
+#### 1.4.4 - 25 June 2022
+- ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed bad call to forum stats hook.
+
 #### 1.4.3 - 19 February 2022
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Support for SMF 2.1.0.
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Improved readmes.

@@ -569,7 +569,7 @@ class SimpleReferrals
 	 *
 	 * @return void
 	 */
-	public function forum_stats()
+	public static function forum_stats()
 	{
 		global $smcFunc, $context, $scripturl, $settings, $modSettings;
 
