@@ -351,11 +351,10 @@ class SimpleReferrals
 		global $context, $txt, $scripturl;
 
 		$context['post_url'] = $scripturl . '?action=admin;area=modsettings;sa=referrals;save';
-		$context['sub_template'] = 'show_settings';
+		$context[$context['admin_menu_name']]['tab_data']['description'] = $txt['SimpleReferrals_settings'];
 		$context['settings_title'] = $txt['SimpleReferrals_settings'];
 		$context['page_title'] .= ' - ' . $txt['SimpleReferrals_settings'];
 
-		// $config_vars []= ['title', 'SimpleReferrals_settings'];
 		$config_vars = [
 			['check', 'SimpleReferrals_allow_select', 'subtext' => $txt['SimpleReferrals_allow_select_desc']],
 			['check', 'SimpleReferrals_enable_profile'],
