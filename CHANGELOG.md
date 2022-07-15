@@ -1,5 +1,8 @@
 # Changelog
 
+#### 1.4.6 - 15 July 2022
+- ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed issue when visiting the settings page.
+
 #### 1.4.4 - 25 June 2022
 - ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed bad call to forum stats hook.
 
