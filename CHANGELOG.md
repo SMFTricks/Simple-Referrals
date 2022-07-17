@@ -1,6 +1,6 @@
 # Changelog
 
-#### 1.4.5 - 15 July 2022
+#### 1.4.5 - 17 July 2022
 - ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed issue when visiting the settings page.
 
 #### 1.4.4 - 25 June 2022
