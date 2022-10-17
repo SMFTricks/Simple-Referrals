@@ -289,24 +289,6 @@ class SimpleReferrals
 	}
 
 	/**
-	 * SimpleReferrals::admin()
-	 *
-	 * Adds the maintainance tab to the menu and sections
-	 *
-	 * @param array $areas The monstrous admin array
-	 * @return void
-	 */
-	public static function admin(&$areas)
-	{
-		global $txt;
-
-		// load language here too
-		loadLanguage('SimpleReferrals/');
-
-		$areas['maintenance']['areas']['maintain']['subsections']['referrals'] = [$txt['maintain_referrals'], 'admin_forum'];
-	}
-
-	/**
 	 * SimpleReferrals::subaction()
 	 *
 	 * Append the subaction
@@ -336,6 +318,9 @@ class SimpleReferrals
 
 		// Add the new setting area
 		$admin_areas['config']['areas']['modsettings']['subsections']['referrals'] = [$txt['SimpleReferrals_settings']];
+
+		// Maintenance area
+		$admin_areas['maintenance']['areas']['maintain']['subsections']['referrals'] = [$txt['maintain_referrals'], 'admin_forum'];
 	}
 
 	/**

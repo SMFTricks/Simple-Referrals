@@ -1,5 +1,8 @@
 # Changelog
 
+#### 1.4.6 - 17 October 2022
+- ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed duplicated hook.
+
 #### 1.4.5 - 17 July 2022
 - ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed issue when visiting the settings page.
 

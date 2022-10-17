@@ -3,7 +3,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>smftricks:simplereferrals</id>
 	<name>Simple Referrals</name>
-	<version>1.4.5</version>
+	<version>1.4.6</version>
 	<type>modification</type>
 	<install for="2.1 - 2.1.99">
 		<!-- Mod Readme -->
@@ -25,11 +25,10 @@
 		<!-- Hooks -->
 		<hook hook="integrate_register" function="SimpleReferrals::save_referral" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_register_after" function="SimpleReferrals::update_count" file="$sourcedir/SimpleReferrals.php" />
-		<hook hook="integrate_admin_areas" function="SimpleReferrals::admin" file="$sourcedir/SimpleReferrals.php" />
-		<hook hook="integrate_manage_maintenance" function="SimpleReferrals::maint_recount" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_general_mod_settings" function="SimpleReferrals::settings" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_modify_modifications" function="SimpleReferrals::mod_settings" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_admin_areas" function="SimpleReferrals::admin_area" file="$sourcedir/SimpleReferrals.php" />
+		<hook hook="integrate_manage_maintenance" function="SimpleReferrals::maint_recount" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_member_context" function="SimpleReferrals::member_context" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_load_member_data" function="SimpleReferrals::member_data" file="$sourcedir/SimpleReferrals.php" />
 		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" />
@@ -44,10 +43,9 @@
 		<!-- Hooks Remove -->
 		<hook hook="integrate_register" function="SimpleReferrals::save_referral" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_register_after" function="SimpleReferrals::update_count" file="$sourcedir/SimpleReferrals.php" reverse="true" />
-		<hook hook="integrate_admin_areas" function="SimpleReferrals::admin" file="$sourcedir/SimpleReferrals.php" reverse="true" />
-		<hook hook="integrate_manage_maintenance" function="SimpleReferrals::maint_recount" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_modify_modifications" function="SimpleReferrals::mod_settings" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_admin_areas" function="SimpleReferrals::admin_area" file="$sourcedir/SimpleReferrals.php" reverse="true" />
+		<hook hook="integrate_manage_maintenance" function="SimpleReferrals::maint_recount" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_member_context" function="SimpleReferrals::member_context" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_load_member_data" function="SimpleReferrals::member_data" file="$sourcedir/SimpleReferrals.php" reverse="true" />
 		<hook hook="integrate_load_custom_profile_fields" function="SimpleReferrals::custom_fields" file="$sourcedir/SimpleReferrals.php" reverse="true" />
