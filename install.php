@@ -63,4 +63,22 @@ elseif (!defined('SMF'))
 			],
 			['id_task']
 		);
+
+
+		// Remove the ghost hook.
+		if (!empty($modSettings['integrate_general_mod_settings']))
+		{
+			removeExtraHook();
+		}
 	}
+
+function removeExtraHook()
+{
+	global $modSettings;
+
+	$hookGeneralSettings = explode(',', $modSettings['integrate_general_mod_settings']);
+	$hookGeneralSettings = array_filter($hookGeneralSettings, function($item) {
+		return $item !== '$sourcedir/SimpleReferrals.php|SimpleReferrals::settings';
+	});
+	updateSettings(['integrate_general_mod_settings' => implode(',', $hookGeneralSettings)]);
+}
