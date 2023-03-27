@@ -1,5 +1,8 @@
 # Changelog
 
+#### 1.4.7 - 26 March 2023
+- ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Removed extra unnecessary hook causing issues.
+
 #### 1.4.6 - 17 October 2022
 - ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed duplicated hook.
 
